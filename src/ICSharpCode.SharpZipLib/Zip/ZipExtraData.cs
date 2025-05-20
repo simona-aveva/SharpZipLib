@@ -648,6 +648,10 @@ namespace ICSharpCode.SharpZipLib.Zip
 			{
 				localTag = ReadShortInternal();
 				localLength = ReadShortInternal();
+
+                // Fix for System Platform including the 4 previous bytes in the local length
+                localLength -= 4;
+
 				if (localTag != headerID)
 				{
 					_index += localLength;
